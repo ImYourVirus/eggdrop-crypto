@@ -24,21 +24,34 @@
 
 # public bind for channel usage
 bind pub - !doge doge
+bind pub - !aur aur
 
 # rest of the code (shouldn't need to edit anything below here)
+
+#api urls
+set aur "http://data.bter.com/api/1/ticker/aur_btc"
+set doge "http://data.bter.com/api/1/ticker/doge_btc"
+
+proc aur {nick uhost handle chan arg} {
+	global aur
+		set url $aur
+		set html [clean $url]
+			putserv "privmsg $chan :AuroraCoin\: $html"
+}
+
 proc doge {nick uhost handle chan arg} {
- set url http://data.bter.com/api/1/ticker/doge_btc
+	global doge
+		set url $doge
+		set html [clean $url]
+			putserv "privmsg $chan :Dogecoin\: $html"
+}
+
+
+proc clean { url } {
  set http  [::http::geturl $url]
  set html  [::http::data $http]
  set html [textutil::splitx $html {(?n)^\s*\n}]
 
-set html [clean $html]
-
-# send info to the channel the command was issued on
-	putserv "privmsg $chan :$html"
-}
-
-proc clean { html } {
 # remove non relevant info from the api stream
  set html [regsub {"result":"true",} $html {}]
  set html [regsub -all {\{} $html {}]
@@ -50,6 +63,7 @@ proc clean { html } {
  set html [regsub {vol_btc.*} $html {}]
  set html [regsub {vol_doge.*} $html {}]
  set html [regsub {avg.*} $html {}]
+ set html [regsub { last\:} $html {last:}]
 
 }
 
