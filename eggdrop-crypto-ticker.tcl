@@ -25,28 +25,33 @@
 # public bind for channel usage
 bind pub - !doge doge
 
-
-
 # rest of the code (shouldn't need to edit anything below here)
-
 proc doge {nick uhost handle chan arg} {
  set url http://data.bter.com/api/1/ticker/doge_btc
-        set http  [::http::geturl $url]
-        set html  [::http::data $http]
-#puts $http
+ set http  [::http::geturl $url]
+ set html  [::http::data $http]
+ set html [textutil::splitx $html {(?n)^\s*\n}]
 
-set html [textutil::splitx $html {(?n)^\s*\n}]
+set html [clean $html]
 
-set html [regsub {"result":"true",} $html {}]
-set html [regsub -all {\{} $html {}]
-set html [regsub -all {\}} $html {}]
-set html [regsub -all {"} $html {}]
-set html [split $html ,]
+# send info to the channel the command was issued on
+	putserv "privmsg $chan :$html"
+}
 
-set html [regsub -all {\{} $html {}]
-set html [regsub -all {\}} $html {}]
-        putserv "privmsg $chan :$html"
+proc clean { html } {
+# remove non relevant info from the api stream
+ set html [regsub {"result":"true",} $html {}]
+ set html [regsub -all {\{} $html {}]
+ set html [regsub -all {\}} $html {}]
+ set html [regsub -all {"} $html {}]
+ set html [split $html ,]
+ set html [regsub -all {\{} $html {}]
+ set html [regsub -all {\}} $html {}]
+ set html [regsub {vol_btc.*} $html {}]
+ set html [regsub {vol_doge.*} $html {}]
+ set html [regsub {avg.*} $html {}]
+
 }
 
 
-putlog " doge ticker loaded "
+putlog " BTer crypto ticker loaded "
