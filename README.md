@@ -1,16 +1,14 @@
 This script pulls the current price from bter.com via the api for current coin prices.  
 
-Example:
-<&ImYourVirus> !zet
-<&McKay> Zeit Coin: last:0.00004236 high:0.00004574 low:0.00003306
-This script assumes you have a working linux installation and eggdrop.
+Example:  
+<&ImYourVirus> !zet  
+<&McKay> Zeit Coin: last:0.00004236 high:0.00004574 low:0.00003306  
+This script assumes you have a working linux installation and eggdrop.  
+Add source scripts/eggdrop-crypto-ticker.tcl to your eggdrop config and rehash.  
+Available commands in any channel the bot is on are as follows:  
 
-Add source scripts/eggdrop-crypto-ticker.tcl to your eggdrop config and rehash.
-
-Available commands in any channel the bot is on are as follows:
-
-!aur for AuroraCoin
-!bc for BC
+!aur for AuroraCoin  
+!bc for BC  
 !bqc for BQC
 !btb for BTB
 !buk for BUK
