@@ -73,6 +73,10 @@ bind pub - !yac yac
 bind pub - !zcc zcc
 bind pub - !zet zet
 
+#cryptsy
+bind pub - !flap flap
+bind pub - !moon moon
+
 # rest of the code (shouldn't need to edit anything below here)
 
 #api urls
@@ -114,6 +118,10 @@ set xpm "http://data.bter.com/api/1/ticker/xpm_btc"
 set yac "http://data.bter.com/api/1/ticker/yac_btc"
 set zcc "http://data.bter.com/api/1/ticker/zcc_btc"
 set zet "http://data.bter.com/api/1/ticker/zet_btc"
+
+#cryptsy
+set moon "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=145"
+set flap "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=165"
 
 proc aur {nick uhost handle chan arg} {
 	global aur
@@ -381,6 +389,21 @@ proc zet {nick uhost handle chan arg} {
 			putserv "privmsg $chan :Zeit Coin\: $html"
 }
 
+#cryptsy
+proc flap {nick uhost handle chan arg} {
+	global flap
+		set url $flap
+		set html [clean $url]
+			putserv "privmsg $chan :$html"
+}
+
+proc moon {nick uhost handle chan arg} {
+	global moon
+		set url $moon
+		set html [clean $url]
+			putserv "privmsg $chan :$html"
+}
+
 proc clean { url } {
  set http  [::http::geturl $url]
  set html  [::http::data $http]
@@ -398,6 +421,13 @@ proc clean { url } {
  set html [regsub {vol_tag.*} $html {}]
  set html [regsub {avg.*} $html {}]
  set html [regsub { last\:} $html {last:}]
+
+# for cryptsy
+ set html [regsub {^(.*)label\:} $html {}]
+ set html [regsub {volume.*} $html {}]
+ set html [regsub {\\\/} $html {_}]
+ set html [regsub {lasttradeprice} $html {last}]
+
 
 }
 
