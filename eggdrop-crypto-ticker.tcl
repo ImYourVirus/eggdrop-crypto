@@ -432,4 +432,4 @@ proc clean { url } {
 }
 
 
-putlog " BTer crypto ticker loaded "
+putlog " BTer/Cryptsy crypto ticker loaded "
