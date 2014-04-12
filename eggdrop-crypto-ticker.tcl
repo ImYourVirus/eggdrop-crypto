@@ -76,6 +76,7 @@ bind pub - !zet zet
 #cryptsy
 bind pub - !flap flap
 bind pub - !moon moon
+bind pub - !amc amc
 
 # rest of the code (shouldn't need to edit anything below here)
 
@@ -120,6 +121,7 @@ set zcc "http://data.bter.com/api/1/ticker/zcc_btc"
 set zet "http://data.bter.com/api/1/ticker/zet_btc"
 
 #cryptsy
+set amc "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=45"
 set moon "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=145"
 set flap "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=165"
 
@@ -389,7 +391,15 @@ proc zet {nick uhost handle chan arg} {
 			putserv "privmsg $chan :Zeit Coin\: $html"
 }
 
-#cryptsy
+# cryptsy
+
+proc amc {nick uhost handle chan arg} {
+	global amc
+		set url $amc
+		set html [clean $url]
+			putserv "privmsg $chan :$html"
+}
+
 proc flap {nick uhost handle chan arg} {
 	global flap
 		set url $flap
