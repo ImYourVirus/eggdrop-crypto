@@ -77,6 +77,9 @@ bind pub - !zet zet
 bind pub - !flap flap
 bind pub - !moon moon
 bind pub - !amc amc
+bind pub - !anc anc
+bind pub - !alf alf
+bind pub - !42 42
 
 # rest of the code (shouldn't need to edit anything below here)
 
@@ -121,9 +124,15 @@ set zcc "http://data.bter.com/api/1/ticker/zcc_btc"
 set zet "http://data.bter.com/api/1/ticker/zet_btc"
 
 #cryptsy
-set amc "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=45"
+set ltc_cryptsy "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3"
+set 42_cryptsy "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=141"
+set alf_cryptsy "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=57"
+set amc "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=43"
+set anc "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=66"
 set moon "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=145"
 set flap "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=165"
+set doge_cryptsy "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132"
+set bqc_cryptsy "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=10"
 
 proc aur {nick uhost handle chan arg} {
 	global aur
@@ -141,9 +150,12 @@ proc bc {nick uhost handle chan arg} {
 
 proc bqc {nick uhost handle chan arg} {
 	global bqc
+	global bqc_cryptsy
 		set url $bqc
 		set html [clean $url]
-			putserv "privmsg $chan :BQC Coin\: $html"
+		set url2 $bqc_cryptsy
+		set html2 [clean $url2]
+			putserv "privmsg $chan :BBQCoin\: (bter)$html (cryptsy)$html2"
 }
 
 proc btb {nick uhost handle chan arg} {
@@ -197,9 +209,12 @@ proc dgc {nick uhost handle chan arg} {
 
 proc doge {nick uhost handle chan arg} {
 	global doge
+	global doge_cryptsy
 		set url $doge
 		set html [clean $url]
-			putserv "privmsg $chan :Doge Coin\: $html"
+		set url2 $doge_cryptsy
+		set html2 [clean $url2]
+			putserv "privmsg $chan :Dogecoin\: (bter)$html (cryptsy)$html2"
 }
 
 proc dtc {nick uhost handle chan arg} {
@@ -246,9 +261,12 @@ proc kdc {nick uhost handle chan arg} {
 
 proc ltc {nick uhost handle chan arg} {
 	global ltc
+	global ltc_cryptsy
 		set url $ltc
 		set html [clean $url]
-			putserv "privmsg $chan :Lite Coin\: $html"
+		set url2 $ltc_cryptsy
+		set html2 [clean $url2]
+			putserv "privmsg $chan :Litecoin\: (bter)$html (cryptsy)$html2"
 }
 
 proc max {nick uhost handle chan arg} {
@@ -397,21 +415,39 @@ proc amc {nick uhost handle chan arg} {
 	global amc
 		set url $amc
 		set html [clean $url]
-			putserv "privmsg $chan :$html"
-}
+			putserv "privmsg $chan :AmericanCoin\: (cryptsy)$html" }
+
+proc anc {nick uhost handle chan arg} {
+	global anc_cryptsy
+		set url $anc_cryptsy
+		set html [clean $url]
+			putserv "privmsg $chan :AnonCoin\: (cryptsy)$html" }
+
+proc alf {nick uhost handle chan arg} {
+	global alf_cryptsy
+		set url $alf_cryptsy
+		set html [clean $url]
+			putserv "privmsg $chan :AlphaCoin\: (cryptsy)$html" }
 
 proc flap {nick uhost handle chan arg} {
 	global flap
 		set url $flap
 		set html [clean $url]
-			putserv "privmsg $chan :$html"
+			putserv "privmsg $chan :FlappyCoin\: (cryptsy)$html"
 }
 
 proc moon {nick uhost handle chan arg} {
 	global moon
 		set url $moon
 		set html [clean $url]
-			putserv "privmsg $chan :$html"
+			putserv "privmsg $chan :MoonCoin\: (cryptsy)$html"
+}
+
+proc 42 {nick uhost handle chan arg} {
+	global 42_cryptsy
+		set url $42_cryptsy
+		set html [clean $url]
+			putserv "privmsg $chan :42Coin\: (cryptsy)$html"
 }
 
 proc clean { url } {

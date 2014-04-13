@@ -48,5 +48,9 @@ Available commands in any channel the bot is on are as follows:
 !zet for Zeit Coin  
 
 # cryptsy  
+!42 for 42 Coin  
+!amc for American Coin  
+!anc for Anon Coin  
+!alf for Alpha Coin  
 !flap for Flappy Coin  
 !moon for Moon Coin  
