@@ -54,7 +54,6 @@ Available commands in any channel the bot is on are as follows:
 !alf for Alpha Coin  
 !moon for Moon Coin  
 
-
 # Allcoin  
 !flap for Flappy Coin  
 
